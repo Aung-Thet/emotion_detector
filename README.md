@@ -1,4 +1,5 @@
 # Web-based Emotion Detector 
+Final Project
 >This is a final project for 'Developing AI Applications with Python and Flask' course from the 'IBM Generative AI Engineering Professional Certificate'. I am creating a web app that detects user's emotions. For this project, I will:
 
 - Task 1: Clone the project repository
