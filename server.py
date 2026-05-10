@@ -1,31 +1,36 @@
-from flask import Flask, render_template, request 
+'''this is the server module'''
+from flask import Flask, render_template, request
 from EmotionDetection.emotion_detection import emotion_detector
 
 app = Flask("Emotion Detector")
 
 @app.route("/emotionDetector")
+
 def sent_emo():
+    '''return emotional analysis'''
     text_to_analyze = request.args.get('textToAnalyze')
     response = emotion_detector(text_to_analyze)
-    
+
     if response is None:
-        return f"Invalid input! Try again."
-    
+        return "Invalid input! Try again."
+
     dominant_emo = response.pop('dominant_emotion')
-    
+
     if dominant_emo is None:
-        return f"Invalid text! Please try again!"
-        
-    else:
-        sys_response = ", ".join([f"{key}: {val}" for key, val in response.items()])
-        return f"For the given statement, the system response is {sys_response}. The dominant emotion is <b>{dominant_emo}</b>."
+        return "Invalid text! Please try again!"
+
+
+    sys_response = ", ".join([f"{key}: {val}" for key, val in response.items()])
+    return (
+        f"For the given statement, the system response is {sys_response}."
+        f"The dominant emotion is <b>{dominant_emo}</b>."
+    )
 
 @app.route("/")
 
 def render_index_page():
+    '''render the html page'''
     return render_template('index.html')
 
 if __name__=="__main__":
     app.run(host = "0.0.0.0", port = 5000)
-
-
