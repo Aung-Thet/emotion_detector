@@ -15,7 +15,7 @@ def sent_emo():
     
     if dominant_emo is None:
         return f"Invalid text! Please try again!"
-        
+
     else:
         sys_response = ", ".join([f"{key}: {val}" for key, val in response.items()])
         return f"For the given statement, the system response is {sys_response}. The dominant emotion is <b>{dominant_emo}</b>."
