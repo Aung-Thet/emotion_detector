@@ -2,14 +2,17 @@ from flask import Flask, render_template, request
 from EmotionDetection.emotion_detection import emotion_detector
 
 app = Flask("Emotion Detector")
-@app.route("/emotionDetector")
 
+@app.route("/emotionDetector")
 def sent_emo():
     text_to_analyze = request.args.get('textToAnalyze')
     response = emotion_detector(text_to_analyze)
+    
+    if response is None:
+        return "Invalid input! Try again."
+    
     dominant_emo = response.pop('dominant_emotion')
     sys_response = ", ".join([f"{key}: {val}" for key, val in response.items()])
-
     return f"For the given statement, the system response is {sys_response}. The dominant emotion is <b>{dominant_emo}</b>."
 
 @app.route("/")
