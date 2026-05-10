@@ -11,5 +11,3 @@ def emotion_detector(text_to_analyze):
     dominant_emotion = max(emotion, key = emotion.get)
     emotion['dominant_emotion'] = dominant_emotion
     return emotion
-    
-
